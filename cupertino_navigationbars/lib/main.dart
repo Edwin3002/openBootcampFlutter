@@ -1,20 +1,114 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
+void main() {
+  runApp(MyApp());
+}
 
-void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        title: "Cupertino NavigationBars",
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(title: "Cupertino"));
+  }
+}
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? Key, this.title}) : super(key: Key);
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  final String? title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    // 1.
+    // return CupertinoPageScaffold(
+    // child: Center(
+    // child:  Column(
+    // mainAxisAlignment: MainAxisAlignment.center,
+    // children: const [
+    //  Text("Cupertino App")
+    // ],)
+    // ),
+    // );
+
+// 2.
+    // return CupertinoTabScaffold(
+    //   tabBar: CupertinoTabBar(backgroundColor: Colors.orange, items: const [
+    //     BottomNavigationBarItem(
+    //         icon: Icon(Icons.home, color: Colors.white), label: "Home"),
+    //     BottomNavigationBarItem(
+    //         icon: Icon(Icons.supervised_user_circle, color: Colors.white),
+    //         label: "Account"),
+    //     BottomNavigationBarItem(
+    //         icon: Icon(Icons.book, color: Colors.white), label: "Statistics"),
+    //   ]),
+    //   tabBuilder: (context, index) {
+    //     switch (index) {
+    //       case 0:
+    //         return CupertinoTabView(builder: (context) {
+    //           return CupertinoPageScaffold(
+    //             child: Center(
+    //                 child: Column(
+    //               children: [Text("$index: Home")],
+    //             )),
+    //           );
+    //         });
+    //       case 1:
+    //         return CupertinoTabView(builder: (context) {
+    //           return CupertinoPageScaffold(
+    //             child: Center(
+    //                 child: Column(
+    //               children: [Text("$index: Account")],
+    //             )),
+    //           );
+    //         });
+    //       case 2:
+    //         return CupertinoTabView(builder: (context) {
+    //           return CupertinoPageScaffold(
+    //             child: Center(
+    //                 child: Column(
+    //               children: [Text("$index: Statistics")],
+    //             )),
+    //           );
+    //         });
+    //       default:
+    //         return CupertinoTabView(builder: (context) {
+    //           return CupertinoPageScaffold(
+    //             child: Center(
+    //                 child: Column(
+    //               children: [Text("$index: Home")],
+    //             )),
+    //           );
+    //         });
+    //     }
+    //   },
+    // );
+
+    // 3.
+    return CupertinoPageScaffold(
+      child: Center(
+        child: Column(
+          children: const [
+            Text(
+              "Nav navigation",
+              style: TextStyle(decoration: TextDecoration.none, fontSize: 20),
+            )
+          ],
+        ),
+      ),
+      navigationBar: const CupertinoNavigationBar(
+      backgroundColor: Colors.cyan,
+        leading: Icon(Icons.arrow_back_ios, color: Colors.white),
+        middle: Text("Title page", style: TextStyle(color: Colors.white)),
+        trailing: Icon(Icons.shopping_cart, color: Colors.white),
+      ),
+    );
+  }
 }
