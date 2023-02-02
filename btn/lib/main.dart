@@ -1,20 +1,90 @@
 import 'package:flutter/material.dart';
 
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
+void main() {
+  runApp(MyApp());
+}
 
-void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: "Btn",
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(title: "Btns"));
+  }
+}
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? Key, this.title}) : super(key: Key);
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  final String? title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String btnPress = "Ninguno";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title!),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Btn press"),
+          Text(
+            "$btnPress",
+            style: TextStyle(
+                color: Colors.cyan, fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          Padding(padding: EdgeInsets.all(20)),
+          ElevatedButton(
+            onPressed: _elevatedPress,
+            child: Text("Btn press 2"),
+            style: ElevatedButton.styleFrom(
+            elevation: 50,
+            primary: Colors.amber,
+            shadowColor: Colors.amberAccent
+            ),
+          )
+        ],
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _floatingPress,
+        tooltip: "Press",
+        child: Icon(
+          Icons.add,
+          color: Colors.red,
+        ),
+        backgroundColor: Colors.orange,
+      ),
+    );
+  }
+
+  void _floatingPress() {
+    _thatBtn("flo");
+  }
+
+  void _elevatedPress() {
+    _thatBtn("ele");
+  }
+
+  void _thatBtn(String btn) {
+    setState(() {
+      switch (btn) {
+        case "flo":
+          btnPress = "Floating action";
+          break;
+        case "ele":
+          btnPress = "Elevated action";
+          break;
+        default:
+      }
+    });
+  }
 }
