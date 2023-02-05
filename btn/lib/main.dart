@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,11 +48,51 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: _elevatedPress,
             child: Text("Btn press 2"),
             style: ElevatedButton.styleFrom(
-            elevation: 50,
-            primary: Colors.amber,
-            shadowColor: Colors.amberAccent
+                elevation: 50,
+                primary: Colors.amber,
+                shadowColor: Colors.amberAccent),
+          ),
+          Padding(padding: EdgeInsets.all(50)),
+          TextButton(
+              onPressed: _textBtnPress,
+              child: Text(
+                "Btn press",
+              ),
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)))),
+          Padding(padding: EdgeInsets.all(8)),
+          IconButton(
+              onPressed: _iconBtnPress,
+              icon: Icon(Icons.accessibility),
+              color: Colors.blue,
+              iconSize: 30),
+          Padding(padding: EdgeInsets.all(8)),
+          Ink(
+            decoration:
+                ShapeDecoration(shape: CircleBorder(), color: Colors.lightBlue),
+            child: IconButton(
+                onPressed: _iconBtnPress,
+                icon: Icon(Icons.accessibility),
+                color: Colors.white,
+                iconSize: 30),
+          ),
+          Padding(padding: EdgeInsets.all(8)),
+          OutlinedButton(
+            onPressed: _outlineBtnPress,
+            child: Text(
+              "Outline press",
+              style: TextStyle(color: Colors.purple),
             ),
-          )
+            style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                    width: 1, color: Colors.purple, style: BorderStyle.solid)),
+          ),
+          Padding(padding: EdgeInsets.all(8)),
+          CupertinoButton(
+              child: Text("Cupertino btn"), onPressed: _cupertinoBtnPress, color: Colors.greenAccent,)
         ],
       )),
       floatingActionButton: FloatingActionButton(
@@ -74,6 +115,22 @@ class _MyHomePageState extends State<MyHomePage> {
     _thatBtn("ele");
   }
 
+  void _textBtnPress() {
+    _thatBtn("tex");
+  }
+
+  void _iconBtnPress() {
+    _thatBtn("ico");
+  }
+
+  void _outlineBtnPress() {
+    _thatBtn("out");
+  }
+
+  void _cupertinoBtnPress() {
+    _thatBtn("cup");
+  }
+
   void _thatBtn(String btn) {
     setState(() {
       switch (btn) {
@@ -82,6 +139,18 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         case "ele":
           btnPress = "Elevated action";
+          break;
+        case "tex":
+          btnPress = "Text action";
+          break;
+        case "ico":
+          btnPress = "Icon action";
+          break;
+        case "out":
+          btnPress = "OutLine action";
+          break;
+        case "cup":
+          btnPress = "Cupertino action";
           break;
         default:
       }
