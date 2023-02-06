@@ -92,7 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Padding(padding: EdgeInsets.all(8)),
           CupertinoButton(
-              child: Text("Cupertino btn"), onPressed: _cupertinoBtnPress, color: Colors.greenAccent,)
+            child: Text("Cupertino btn"),
+            onPressed: _cupertinoBtnPress,
+            color: Colors.greenAccent,
+          )
         ],
       )),
       floatingActionButton: FloatingActionButton(
