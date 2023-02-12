@@ -8,9 +8,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Center",
+        title: "Container",
         debugShowCheckedModeBanner: false,
-        home: MyHomePage(title: "Center"));
+        home: MyHomePage(title: "Container"));
   }
 }
 
