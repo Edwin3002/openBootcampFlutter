@@ -29,13 +29,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(builder: (context, snapshot) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title!),
-        ),
-        // body: (),
-      );
-    });
+    return StreamBuilder(
+        stream: _countControl.stream,
+        initialData: 0,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.title!),
+            ),
+            body: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("${snapshot.data}", style: TextStyle(fontSize: 50),),
+              ],
+            )),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.plus_one),
+              onPressed: _countControl.increment,
+            ),
+          );
+        });
+  }
+
+  @override
+
+  void dipose(){
+  _countControl.dispose();
+  super.dispose();
   }
 }
