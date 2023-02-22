@@ -1,83 +1,37 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Alert Diaolog",
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage(title: "Alert Diaolog"));
+      title: "Simple Dialog",
+      debugShowCheckedModeBanner: false,
+      home: MyHome(),
+    );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? Key, required this.title}) : super(key: Key);
+class MyHome extends StatefulWidget {
+  String title = "Simple Dialog";
 
-  final String title;
+  State createState() {
+    return _MyHome();
+  }
+}
+
+class _MyHome extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
-      body: (Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          ElevatedButton(
-            onPressed: () {
-              showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("Dialog Title"),
-                      content: Text("Body"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Close Dialog"),
-                        )
-                      ],
-                    );
-                  });
-            },
-            child: Text("Open Dialog"),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.blue, textStyle: TextStyle(color: Colors.blue)),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CupertinoAlertDialog(
-                      title: Text("Cupertino Dialog Title"),
-                      content: Text("Body"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text("Close Dialog"),
-                        )
-                      ],
-                    );
-                  });
-            },
-            child: Text("Open Cupertino Dialog"),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.red, textStyle: TextStyle(color: Colors.white)),
-          ),
-        ]),
-      )),
     );
   }
+
 }
