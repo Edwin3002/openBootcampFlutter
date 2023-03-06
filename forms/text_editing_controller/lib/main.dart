@@ -8,9 +8,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "TextFields",
+        title: "TextEditing",
         debugShowCheckedModeBanner: false,
-        home: MyHomePage(title: "TextFields"));
+        home: MyHomePage(title: "TextEditing"));
   }
 }
 
@@ -29,6 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
       TextStyle(color: Colors.orange, fontWeight: FontWeight.bold);
   String _textInput = "Nobody text";
   String _textSend = "Nobody send text";
+
+  // String _introduceText = "Nobody text";
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     TextField(
                       // keyboardType: TextInputType., ///seleccionar tipos de inputs
                       decoration: const InputDecoration(hintText: "your nme"),
-                      onChanged: (value) {
-                        setState(() {
-                          _textInput = value;
-                        });
-                      },
+                      // onChanged: (value) {
+                      //   setState(() {
+                      //     _textInput = value;
+                      //   });
+                      // },
+                      controller: _controller,
                       onSubmitted: (value) {
                         setState(() {
                           _textSend = value;
@@ -95,5 +99,24 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_showIntroduceText);
+    _controller.value = TextEditingValue(text: "Initial value");
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _showIntroduceText() {
+    setState(() {
+      _textInput = _controller.text;
+    });
   }
 }
