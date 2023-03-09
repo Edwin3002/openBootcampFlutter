@@ -39,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Text("texto ${_valueSlider.toStringAsFixed(2)}"),
             Slider(
             autofocus: false,
+            label: "$_valueSlider",
+            divisions: 20,
               value: _valueSlider,
               onChanged: (value) {
                 setState(() {
