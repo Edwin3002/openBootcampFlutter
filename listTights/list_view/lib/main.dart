@@ -40,29 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title!),
         ),
-        body: ListView.builder(
-            itemCount: _medias.length,
-            itemBuilder: (context, index) {
-              final item = _medias[index];
-              return ListTile(
-                title: Text("${item.name}",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                        fontSize: 20)),
-                subtitle: Text(
-                  "${item.category}",
-                  textAlign: TextAlign.center,
-                ),
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(title: Text("${item.name}"), content: item.img);
-                      });
-                },
-              );
-            }));
+        body: GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemCount: _medias.length,
+          itemBuilder: ((context, index) {
+            final item = _medias.elementAt(index);
+            return GridTileBar(
+              title: Text("${item.name}"),
+              subtitle: Container(child: item.img),
+            );
+          }),
+        ));
   }
 }
